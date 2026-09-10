@@ -20,26 +20,26 @@ Sebelum memulai, pastikan Anda telah menyiapkan hal-hal berikut:
 
 ## 📁 Struktur Repositori & Penamaan File
 
-Setiap mahasiswa telah memiliki folder khusus di repositori ini dengan format:
-`NIM - Nama Lengkap`
+Setiap mahasiswa mengumpulkan tugas ke dalam folder dengan nama **NIM saja (tanpa spasi)**:
+`NIM_ANDA`
 
 ### Visualisasi Struktur Folder:
 ```text
 LAB-AP-1-2026/
-├── H071261041 - Aisyah Kamila/
+├── H071261041/
 │   ├── Praktikum-1/
 │   │   ├── TP1_1_H071261041.py
 │   │   └── TP1_2_H071261041.py
 │   └── Praktikum-2/
 │       └── TP2_1_H071261041.py
-├── H071261042 - Abd. Faathir Ath Thaariq/
+├── H071261042/
 └── README.md
 ```
 
 ### Aturan Penamaan File & Folder:
 | Elemen | Format / Aturan Penamaan | Contoh |
 | :--- | :--- | :--- |
-| **Folder Mahasiswa** | `<NIM> - <Nama Lengkap>` | `H071261041 - Aisyah Kamila` *(Sudah ada di repo)* |
+| **Folder Mahasiswa** | `<NIM>` *(Tanpa spasi/nama)* | `H071261041` |
 | **Folder Praktikum** | `Praktikum-<n>` *(n = nomor praktikum)* | `Praktikum-1`, `Praktikum-2` |
 | **File Tugas** | `TP<n>_<noSoal>_<NIM>.py` | `TP1_1_H071261041.py`, `TP2_3_H071261041.py` |
 
@@ -89,12 +89,12 @@ git checkout -b NIM_ANDA
 
 ---
 
-### 5. Masuk ke Folder Mahasiswa & Buat Sub-folder Praktikum
-Navigasikan ke dalam folder nama Anda yang telah tersedia di repositori, lalu buat folder praktikum sesuai minggunya:
+### 5. Masuk ke Folder NIM Anda & Buat Sub-folder Praktikum
+Navigasikan ke dalam folder NIM Anda di repositori, lalu buat folder praktikum sesuai minggunya:
 
 ```bash
-# Masuk ke folder Anda (gunakan tanda kutip jika nama folder mengandung spasi)
-cd "H071261041 - Aisyah Kamila"
+# Masuk ke folder NIM Anda
+cd H071261041
 
 # Buat folder Praktikum-n (misal: Praktikum-1)
 mkdir Praktikum-1
@@ -153,7 +153,7 @@ git push origin NIM_ANDA
 3. Pastikan konfigurasi perbandingan branch benar:
    - **base repository**: `ShinZeleo/LAB-AP-1-2026` (base: `main`)
    - **head repository**: `USERNAME_ANDA/LAB-AP-1-2026` (compare: `NIM_ANDA`)
-4. Berikan judul Pull Request yang jelas, contoh: `[TP-1] H071261041 - Aisyah Kamila`.
+4. Berikan judul Pull Request yang jelas, contoh: `[TP-1] H071261041`.
 5. Klik **Create pull request**.
 
 ---
