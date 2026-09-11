@@ -20,8 +20,7 @@ Sebelum memulai, pastikan Anda telah menyiapkan hal-hal berikut:
 
 ## 📁 Struktur Repositori & Penamaan File
 
-Setiap mahasiswa mengumpulkan tugas ke dalam folder dengan nama **NIM saja (tanpa spasi)**:
-`NIM_ANDA`
+Seluruh folder mahasiswa (`NIM`) dan subfolder praktikum (`Praktikum-1` s.d. `Praktikum-9`) **telah disediakan di repositori ini**.
 
 ### Visualisasi Struktur Folder:
 ```text
@@ -30,18 +29,20 @@ LAB-AP-1-2026/
 │   ├── Praktikum-1/
 │   │   ├── TP1_1_H071261041.py
 │   │   └── TP1_2_H071261041.py
-│   └── Praktikum-2/
-│       └── TP2_1_H071261041.py
+│   ├── Praktikum-2/
+│   │   └── TP2_1_H071261041.py
+│   ├── ...
+│   └── Praktikum-9/
 ├── H071261042/
 └── README.md
 ```
 
 ### Aturan Penamaan File & Folder:
-| Elemen | Format / Aturan Penamaan | Contoh |
-| :--- | :--- | :--- |
-| **Folder Mahasiswa** | `<NIM>` *(Tanpa spasi/nama)* | `H071261041` |
-| **Folder Praktikum** | `Praktikum-<n>` *(n = nomor praktikum)* | `Praktikum-1`, `Praktikum-2` |
-| **File Tugas** | `TP<n>_<noSoal>_<NIM>.py` | `TP1_1_H071261041.py`, `TP2_3_H071261041.py` |
+| Elemen | Format / Aturan Penamaan | Contoh | Status |
+| :--- | :--- | :--- | :--- |
+| **Folder Mahasiswa** | `<NIM>` *(Tanpa spasi/nama)* | `H071261041` | *Sudah tersedia* |
+| **Folder Praktikum** | `Praktikum-<n>` *(n = 1 s.d. 9)* | `Praktikum-1`, `Praktikum-2` | *Sudah tersedia* |
+| **File Tugas** | `TP<n>_<noSoal>_<NIM>.py` | `TP1_1_H071261041.py`, `TP2_3_H071261041.py` | *Dibuat oleh Mahasiswa* |
 
 ---
 
@@ -49,7 +50,7 @@ LAB-AP-1-2026/
 
 Ikuti langkah-langkah berikut secara berurutan:
 
-### 1. Fork Repositori
+### 1. Fork Repositori (Sekali di Awal Semester)
 1. Buka halaman repositori utama **LAB-AP-1-2026** di GitHub.
 2. Klik tombol **Fork** di pojok kanan atas halaman.
 3. Klik **Create fork** untuk menyalin repositori ini ke akun GitHub Anda.
@@ -68,47 +69,44 @@ cd LAB-AP-1-2026
 
 ---
 
-### 3. Konfigurasi Identitas Git (Sekali di Komputer)
-Pastikan Git mengidentifikasi commit Anda dengan nama dan email GitHub yang benar:
+### 3. Sync Fork & Pull Terbaru (Sebelum Mengerjakan Praktikum Baru)
+Setiap akan mengerjakan praktikum baru, pastikan repositori fork dan komputer Anda sudah menerima struktur folder terbaru dari repo utama:
+1. Di web GitHub repositori fork Anda, klik **Sync fork** $\rightarrow$ **Update branch**.
+2. Di terminal komputer Anda, jalankan:
+   ```bash
+   git checkout main
+   git pull origin main
+   ```
+
+---
+
+### 4. Buat dan Pindah ke Branch Praktikum (`praktikum-n`)
+Selalu kerjakan tugas pada **branch baru** (bukan langsung di branch `main`):
 
 ```bash
-git config user.name "USERNAME_GITHUB_ANDA"
-git config user.email "EMAIL_GITHUB_ANDA"
+# Contoh untuk Praktikum 2:
+git checkout -b praktikum-2
 ```
 
 ---
 
-### 4. Buat dan Pindah ke Branch Baru (`NIM_ANDA`)
-Selalu kerjakan tugas pada **branch baru** dengan nama **NIM** Anda (bukan di branch `main`):
+### 5. Masuk ke Folder Praktikum Yang Sesuai
+Navigasikan ke folder NIM Anda, lalu masuk ke folder praktikum minggu ini:
 
 ```bash
-# Membuat sekaligus berpindah ke branch baru
-git checkout -b NIM_ANDA
-```
-*Contoh:* `git checkout -b H071261041`
-
----
-
-### 5. Masuk ke Folder NIM Anda & Buat Sub-folder Praktikum
-Navigasikan ke dalam folder NIM Anda di repositori, lalu buat folder praktikum sesuai minggunya:
-
-```bash
-# Masuk ke folder NIM Anda
-cd H071261041
-
-# Buat folder Praktikum-n (misal: Praktikum-1)
-mkdir Praktikum-1
-cd Praktikum-1
+# Contoh untuk mahasiswa NIM H071261041 pada Praktikum 2:
+cd H071261041/Praktikum-2
 ```
 
 ---
 
 ### 6. Simpan File Tugas Anda
-Simpan seluruh file program Python Anda di dalam folder `Praktikum-n` tersebut dengan penamaan yang sesuai.
+Simpan seluruh file program Python Anda di dalam folder `Praktikum-n` tersebut dengan format penamaan:
+`TP<n>_<noSoal>_<NIM>.py`
 
 *Contoh:*
-- File soal 1: `TP1_1_H071261041.py`
-- File soal 2: `TP1_2_H071261041.py`
+- File soal 1: `TP2_1_H071261041.py`
+- File soal 2: `TP2_2_H071261041.py`
 
 ---
 
@@ -122,62 +120,48 @@ Setelah menyelesaikan kode program:
 
 2. **Tambahkan File ke Staging Area:**
    ```bash
-   git add TP1_1_H071261041.py
+   git add TP2_1_H071261041.py
    # Atau tambahkan seluruh file di folder Praktikum saat ini:
    git add .
    ```
-   > [!TIP]
-   > Gunakan `git status` kembali untuk memastikan file yang akan di-commit berwarna hijau.
 
 3. **Lakukan Commit dengan Pesan Deskriptif:**
    ```bash
-   git commit -m "Menambahkan tugas TP1 no 1 dan 2 H071261041"
+   git commit -m "Menambahkan tugas TP2 no 1 dan 2 H071261041"
    ```
 
 ---
 
 ### 8. Push Branch ke Repositori Fork Anda
-Unggah perubahan dari komputer ke akun GitHub Anda:
+Unggah branch tugas dari komputer ke akun GitHub Anda:
 
 ```bash
-git push origin NIM_ANDA
+git push origin praktikum-2
 ```
-*Contoh:* `git push origin H071261041`
 
 ---
 
 ### 9. Buat Pull Request (PR) di GitHub
 1. Buka repositori hasil **fork** Anda di halaman browser GitHub.
-2. Anda akan melihat spanduk kuning bertuliskan **Compare & pull request**, klik tombol tersebut.
-   *(Atau masuk ke tab **Pull requests** > **New pull request**)*.
-3. Pastikan konfigurasi perbandingan branch benar:
+2. Klik tombol **Compare & pull request** yang muncul.
+3. Pastikan perbandingan branch:
    - **base repository**: `ShinZeleo/LAB-AP-1-2026` (base: `main`)
-   - **head repository**: `USERNAME_ANDA/LAB-AP-1-2026` (compare: `NIM_ANDA`)
-4. Berikan judul Pull Request yang jelas, contoh: `[TP-1] H071261041`.
+   - **head repository**: `USERNAME_ANDA/LAB-AP-1-2026` (compare: `praktikum-2`)
+4. Berikan judul Pull Request yang jelas, contoh: `[TP-2] H071261041`.
 5. Klik **Create pull request**.
 
 ---
 
 ## 🔑 Autentikasi Push di GitHub (Personal Access Token / PAT)
 
-Jika saat melakukan `git push` Anda diminta memasukkan Password, **GitHub tidak lagi menerima password akun biasa**. Anda harus menggunakan **Personal Access Token (PAT)** sebagai password.
-
-### Cara Membuat Personal Access Token (Classic):
-1. Klik **Foto Profil** Anda di pojok kanan atas GitHub > **Settings**.
-2. Gulir ke bawah pada menu sebelah kiri dan klik **Developer settings**.
-3. Pilih **Personal access tokens** > **Tokens (classic)**.
-4. Klik **Generate new token** > **Generate new token (classic)**.
-5. Isi bagian **Note** (contoh: *Token untuk LAB-AP-1-2026*).
-6. Tentukan masa berlaku (*Expiration*), misal: 90 hari / No expiration.
-7. Pada bagian **Select scopes**, centang kotak **`repo`** (Full control of private repositories).
-8. Klik **Generate token** di bagian paling bawah.
-9. **Salin dan simpan token tersebut** (Token hanya ditampilkan sekali). Gunakan token ini sebagai *Password* ketika diminta di terminal/Git CLI.
+Jika saat melakukan `git push` Anda diminta memasukkan Password, gunakan **Personal Access Token (PAT)**:
+1. Profile > **Settings** > **Developer settings** > **Personal access tokens** > **Tokens (classic)**.
+2. Klik **Generate new token (classic)**, isi note, centang scope **`repo`**, lalu **Generate token**.
+3. Gunakan token ini sebagai *Password* di terminal/Git.
 
 ---
 
 ## 💡 Tips & Troubleshooting
 
-- **Cek Branch Aktif**: Selalu pastikan Anda berada di branch `NIM_ANDA` sebelum membuat/mengedit file dengan mengetik `git branch`.
-- **Pesan Commit yang Jelas**: Gunakan pesan commit yang singkat dan padat menjelaskan apa yang diubah.
-- **Sync Fork (Jika Repositori Utama Berubah)**:
-  Jika ada pembaruan di repo utama, buka repo fork Anda di browser dan klik tombol **Sync fork** > **Update branch**, lalu lakukan `git pull origin main` di komputer Anda.
+- **Cek Branch Aktif**: Ketik `git branch` untuk melihat branch yang sedang aktif sebelum mulai mengedit file.
+- **Sync Fork**: Selalu lakukan **Sync Fork** di GitHub sebelum membuat branch baru agar folder terbaru terunduh.
