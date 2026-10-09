@@ -1,0 +1,38 @@
+ALFABET = "abcdefghijklmnopqrstuvwxyz"
+
+def bersihkan_teks(teks):
+    hasil = ""                      
+    for ch in teks:                
+        huruf = ch.lower()         
+        if huruf in ALFABET:        
+            hasil = hasil + huruf  
+    return hasil
+
+def cek_palinrome(teks):
+    terbalik = "".join(reversed(teks))   
+    if teks == terbalik:                 
+        return (True, -1)
+    for i in range(len(teks)):           
+        if teks[i] != terbalik[i]:
+            return (False, i)
+
+def inti_palinrome(teks):
+    terbaik = ""                         
+    awal = 0                             
+    for i in range(len(teks)):               
+        for j in range(i + 1, len(teks) + 1):  
+            potong = teks[i:j]                  
+            hasil_cek = cek_palinrome(potong)   
+            if hasil_cek[0] and len(potong) > len(terbaik):
+                terbaik = potong                
+                awal = i
+    return {"teks": terbaik, "panjang": len(terbaik), "indeks_awal": awal}
+
+teks = input("Masukkan teks prasasti: ")
+bersih = bersihkan_teks(teks)
+
+print("Teks Bersih:", bersih)
+if bersih == "":
+    print("Tidak ada huruf pada teks, palindrom tidak bisa dicari.")
+else:
+    print("Output Terharap:", inti_palinrome(bersih))
