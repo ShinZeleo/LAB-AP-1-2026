@@ -1,0 +1,21 @@
+while True:
+ 
+    try:
+        jumlah = int(input("Masukkan jumlah item: "))
+    except ValueError:
+        print("Input harus berupa angka!")
+        continue
+ 
+    if jumlah == 0:
+        print("Toko ditutup. Sesi rekap selesai.")
+        break
+ 
+    if jumlah < 0:
+        print("Jumlah tidak boleh negatif")
+        continue
+ 
+    if jumlah > 100:
+        print("Maksimal 100 item per transaksi!")
+        continue
+
+    print(f"Transaksi {jumlah} item berhasil!")
