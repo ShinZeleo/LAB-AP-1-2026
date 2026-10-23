@@ -13,8 +13,8 @@ INDENT = " " * 5
 
 def buat_id_transaksi(nama_kasir, waktu):
     inisial = ""
-    for kata in nama_kasir.split(): #memecah setiap kata
-        inisial += kata[0]
+    for kata in nama_kasir.split(): 
+        inisial += kata[:3]
 
     tanggal_waktu = waktu.strftime("%y%m%d%H%M") 
     angka_acak = str(random.randint(100, 999))
@@ -54,14 +54,13 @@ def transaksi_baru(nama_kasir):
     print(GARIS)
 
 def buat_invoice(id_transaksi, nama_kasir, waktu, daftar_produk, total):
-    if not os.path.exists(FOLDER): #os.path.exists(FOLDER) adalah fungsi yang mengecek apakah direktori telah ada atau belum
+    if not os.path.exists(FOLDER):
         os.mkdir(FOLDER)
 
     garis = "=" * LEBAR
     garis_tabel = INDENT + "=" * 57
 
     with open(FOLDER + "/" + id_transaksi + ".txt", "w") as f:   
-    #  pakai with open biar kalo dibuka dia bisa tertutup otomatis
         f.write("\n")
         f.write(("TOKO KU").center(LEBAR) + "\n")
         f.write(garis + "\n")
@@ -106,7 +105,7 @@ def cari_transaksi():
 def catat_riwayat(waktu, id_transaksi, total):
     garis = "=" * LEBAR
 
-    if not os.path.exists(RIWAYAT): #(exist) ada didalam jalur
+    if not os.path.exists(RIWAYAT): 
         with open(RIWAYAT, "w") as f:
             f.write(garis + "\n")
             f.write("|" + "RIWAYAT TRANSAKSI".center(64) + "\n")
@@ -117,12 +116,11 @@ def catat_riwayat(waktu, id_transaksi, total):
     with open(RIWAYAT, "a") as f:
         f.write("| " + waktu.strftime("%d/%m/%y %H:%M").ljust(14) + " | " + id_transaksi.ljust(20) + " | " + ("Rp" + str(total)).rjust(22) + " |\n")
         f.write(garis + "\n")
-      #append data ke file tanpa menghapus data yang sudah ada, kalau write menghapus dulu semua data yang sudah ada lalu ditulis ulang.
 
 print(GARIS)
 print("SELAMAT DATANG".center(60))
 print(GARIS)
-nama_kasir = input("Masukkan nama kasir      : ").title() #memgkapitalkan huruf pertma tiap kata
+nama_kasir = input("Masukkan nama kasir      : ").title() 
 print(GARIS)
 
 while True:
