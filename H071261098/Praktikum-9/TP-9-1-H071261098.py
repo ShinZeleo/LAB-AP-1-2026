@@ -3,7 +3,6 @@ class Pemain:
         self.nama = nama
         self.id_pemain = id_pemain
         self.role = role
-        # Konversi ke float dilakukan di luar atau di dalam init aman jika input sudah divalidasi
         self.nilai_kill = float(nilai_kill)
         self.nilai_assist = float(nilai_assist)
         self.nilai_objective = float(nilai_objective)
@@ -38,7 +37,7 @@ class Pemain:
         return f"{self.nama}".ljust(12) + " | " + f"{self.id_pemain}".ljust(10) + " | " + f"{self.role}".ljust(10) + " | " + f"{skor:.2f}".ljust(10) + " | " + f"{status}".ljust(16) + " | " + f"{self.level}".ljust(10) + " | "
 
 data_pemain = []
-print("--- SISTEM PENILAIAN PERFORMA PEMAIN---")
+print("--- SISTEM PENILAIAN PERFORMA PEMAIN ---")
 
 while True:
     try:
@@ -57,39 +56,67 @@ while pemain <= jumlah_pemain:
     data_id = input("ID Pemain".ljust(16) + ": ")
     data_role = input("Role".ljust(16) + ": ")
     
-    
     while True:
         try:
-            data_kill = float(input("Nilai Kill".ljust(16) + ": "))
+            n_kill = float(input("Nilai Kill".ljust(16) + ": "))
+            n_assist = float(input("Nilai Assist".ljust(16) + ": "))
+            n_obj = float(input("Nilai Objective".ljust(16) + ": "))
             break
         except ValueError:
-            print("Input salah! Nilai Kill harus berupa angka.")
+            print("Input nilai tidak valid! Masukkan angka.")
 
-   
-    while True:
-        try:
-            data_assist = float(input("Nilai Assist".ljust(16) + ": "))
-            break
-        except ValueError:
-            print("Input salah! Nilai Assist harus berupa angka.")
-
-    
-    while True:
-        try:
-            data_objective = float(input("Nilai Objective".ljust(16) + ": "))
-            break
-        except ValueError:
-            print("Input salah! Nilai Objective harus berupa angka.")
-
-    isi_data_pemain = Pemain(data_nama, data_id, data_role, data_kill, data_assist, data_objective)
-    data_pemain.append(isi_data_pemain)
+    p = Pemain(data_nama, data_id, data_role, n_kill, n_assist, n_obj)
+    data_pemain.append(p)
     pemain += 1
 
+print("\n" + "="*85)
+print("REKAPITULASI PERFORMA PEMAIN".center(85))
+print("="*85)
+print("Nama".ljust(12) + " | " + "ID Pemain".ljust(10) + " | " + "Role".ljust(10) + " | " + "Skor Akhir".ljust(10) + " | " + "Status".ljust(16) + " | " + "Level".ljust(10) + " | ")
+print("-"*85)
+for p in data_pemain:
+    print(p.tampilkan_data())
+print("="*85)
 
-print("\n--- REKAPITULASI PERFORMA PEMAIN---")
-print("=" * 92)
-print("| " + "No".ljust(3) + "| " + "Nama".ljust(12) + " | " + "ID Pemain".ljust(10) + " | " + "Role".ljust(10) + " | " + "Skor Akhir".ljust(10) + " | " + "Status".ljust(16) + " | " + "Level".ljust(10) + " |")
-print("=" * 92)
-for i, isi in enumerate(data_pemain, start=1):
-    print(f"| {str(i).ljust(3)}| " + isi.tampilkan_data())
-print("=" * 92)
+print("\n*** PENCARIAN PEMAIN ***\n")
+cari_id = input("Masukkan ID Pemain: ")
+
+pemain_ditemukan = None
+
+for p in data_pemain:
+    if p.id_pemain == cari_id:
+        pemain_ditemukan = p
+        break
+
+if pemain_ditemukan:
+    print("\nData Pemain Ditemukan!\n")
+    print("Nama".ljust(12) + f": {pemain_ditemukan.nama}")
+    print("ID".ljust(12) + f": {pemain_ditemukan.id_pemain}")
+    print("Role".ljust(12) + f": {pemain_ditemukan.role}")
+    print("Skor Akhir".ljust(12) + f": {pemain_ditemukan.hitung_skor_akhir():.2f}")
+    print("Status".ljust(12) + f": {pemain_ditemukan.status_performa()}")
+else:
+    print("\nPemain tidak ditemukan!")
+
+total_pemain = len(data_pemain)
+jumlah_unggul = 0
+jumlah_evaluasi = 0
+total_skor = 0
+
+for p in data_pemain:
+    skor = p.hitung_skor_akhir()
+    status = p.status_performa()
+    total_skor += skor
+    
+    if status == "Unggul":
+        jumlah_unggul += 1
+    elif status == "Perlu Evaluasi":
+        jumlah_evaluasi += 1
+
+rata_rata_skor = total_skor / total_pemain if total_pemain > 0 else 0
+
+print("\n=== STATISTIK PERTANDINGAN ===\n")
+print("Total Pemain".ljust(16) + f": {total_pemain}")
+print("Pemain Unggul".ljust(16) + f": {jumlah_unggul}")
+print("Perlu Evaluasi".ljust(16) + f": {jumlah_evaluasi}")
+print("Rata-rata Skor".ljust(16) + f": {rata_rata_skor:.2f}")
