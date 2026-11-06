@@ -1,0 +1,10 @@
+kata = input("Masukkan kata : ").strip()
+
+if kata == "":
+    print("Kata tidak boleh kosong.")
+else:
+    awal = kata[0]
+    tengah = kata[len(kata) // 2]
+    akhir = kata[len(kata) - 1]
+    hasil = awal + tengah + akhir
+    print(hasil)
